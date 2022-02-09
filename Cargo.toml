@@ -10,6 +10,7 @@ homepage = "https://github.com/acj/file-chunker"
 categories = ["filesystem", "text-processing"]
 keywords = ["chunk", "chunking", "concurrency", "files"]
 documentation = "https://docs.rs/file-chunker/"
+exclude = ["/.github"]
 
 [dependencies]
 anyhow = "1.0.53"
