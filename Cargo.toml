@@ -1,0 +1,19 @@
+[package]
+name = "file-chunker"
+description = "Efficiently process a file in (approximately) equally-sized parts"
+version = "0.1.0"
+authors = ["Adam Jensen <adam@acj.sh>"]
+license = "MIT"
+edition = "2021"
+repository = "https://github.com/acj/file-chunker"
+homepage = "https://github.com/acj/file-chunker"
+categories = ["filesystem", "text-processing"]
+keywords = ["chunk", "chunking", "concurrency", "files"]
+documentation = "https://docs.rs/file-chunker/"
+
+[dependencies]
+anyhow = "1.0.53"
+memmap2 = "0.5.2"
+
+[dev-dependencies]
+tempfile = "3.3.0"
