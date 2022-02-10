@@ -1,7 +1,7 @@
 [package]
 name = "file-chunker"
 description = "Efficiently process a file in (approximately) equally-sized parts"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Adam Jensen <adam@acj.sh>"]
 license = "MIT"
 edition = "2018"
