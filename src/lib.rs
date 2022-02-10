@@ -50,16 +50,16 @@ impl FileChunker {
         let mut offset = 0;
         while offset < self.mmap.len() {
             let mut chunk_end = offset + chunk_size;
-            if chunk_end > self.mmap.len() {
-                chunks.push(&self.mmap[offset..]);
-                break;
-            }
             if let Some(delimiter) = delimiter {
                 while (chunk_end < self.mmap.len() - 1) && (self.mmap[chunk_end] != delimiter as u8)
                 {
                     chunk_end += 1;
                 }
                 chunk_end += 1;
+            }
+            if chunk_end > self.mmap.len() {
+                chunks.push(&self.mmap[offset..]);
+                break;
             }
             chunks.push(&self.mmap[offset..chunk_end]);
             offset = chunk_end;
@@ -272,5 +272,21 @@ Nov 23 06:26:49 ip-10-1-1-1 haproxy[20128]: 10.1.1.12:38899 [23/Nov/2019:06:35:4
             String::from_utf8_lossy(chunks[4]),
             log[(4 * (chunk_size + 1))..].to_string()
         );
+    }
+
+    #[test]
+    fn chunks_with_delimiter_single_chunk() {
+        let log = "Why, sometimes I've believed as many as six impossible things before breakfast.";
+
+        let mut file: File = tempfile::tempfile().unwrap();
+        file.write_all(log.as_bytes()).unwrap();
+        file.flush().unwrap();
+
+        let chunk_count = 1;
+        let chunker = FileChunker::new(&file).unwrap();
+        let chunks = chunker.chunks(chunk_count, Some('\n')).unwrap();
+
+        assert_eq!(chunks[0].len(), log.len());
+        assert_eq!(chunks.len(), 1);
     }
 }
