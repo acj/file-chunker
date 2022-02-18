@@ -1,5 +1,8 @@
 # file-chunker
 
+[<img alt="crates.io" src="https://img.shields.io/crates/v/file-chunker.svg?style=for-the-badge&color=fc8d62&logo=rust" height="20">](https://crates.io/crates/file-chunker)
+[<img alt="build status" src="https://img.shields.io/github/workflow/status/acj/file-chunker/CI/main?style=for-the-badge" height="20">](https://github.com/acj/file-chunker/actions?query=branch%3Amain)
+
 This crate provides the `FileChunker` type, which is useful for efficiently reading a file
 in (approximately) equally-sized parts.
 
