@@ -15,7 +15,7 @@ env:
 jobs:
   format:
     name: Check code formatting
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -34,27 +34,24 @@ jobs:
       matrix:
         build:
           - linux
-          - macos
+          - macOS
           - windows
         include:
           - build: linux
-            os: ubuntu-20.04
+            os: ubuntu-22.04
             target: x86_64-unknown-linux-gnu
-          - build: macos
-            os: macos-11
+          - build: macOS
+            os: macos-12
             target: x86_64-apple-darwin
           - build: windows
-            os: windows-2019
+            os: windows-2022
             target: i686-pc-windows-msvc
 
     steps:
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          default: true
-          toolchain: stable
+        uses: dtolnay/rust-toolchain@984d158d699777abbaa79de23de3134e60c187fa # stable branch
       - name: Cargo Cache
-        uses: actions/cache@v2.1.7
+        uses: actions/cache@v3.0.4
         with:
           path: |
             ~/.cargo/registry
@@ -62,7 +59,7 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.target }}-cargo-
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Build
         run: cargo build --release
       - name: Run tests
