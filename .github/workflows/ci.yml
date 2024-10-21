@@ -38,10 +38,10 @@ jobs:
           - windows
         include:
           - build: linux
-            os: ubuntu-22.04
+            os: ubuntu-24.04
             target: x86_64-unknown-linux-gnu
           - build: macOS
-            os: macos-12
+            os: macos-14
             target: x86_64-apple-darwin
           - build: windows
             os: windows-2022
